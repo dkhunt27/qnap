@@ -1,0 +1,47 @@
+version: "3"
+services:
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    ports:
+      - 443:443
+    volumes:
+      - /share/CACHEDEV1_DATA/letsencrypt:/config
+    restart: always
+    depends_on:
+      - ombi
+      - smokeping
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - EMAIL=letsencrypt@dkhunt272.33mail.com
+      - URL=hunt27.com
+      - SUBDOMAINS=plex
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
+      - ONLY_SUBDOMAINS=true
+      - DHLEVEL=4096
+      - TZ=America/Detroit
+  smokeping:
+    image: linuxserver/smokeping
+    container_name: smokeping
+    volumes:
+      - /share/CACHEDEV1_DATA/smokeping/config:/config
+      - /share/CACHEDEV1_DATA/smokeping/data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped
+  ombi:
+    image: linuxserver/ombi
+    container_name: ombi
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Detroit
+      - BASE_URL=/ombi #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/ombi/config1080:/config
+    ports:
+      - 13579:3579
+    restart: unless-stopped

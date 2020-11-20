@@ -1,0 +1,17 @@
+version: "3"
+services:
+  radarr4konly:
+    image: linuxserver/radarr:3.0.0.2719-ls1
+    container_name: radarr4konly
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/radarr/config4k:/config
+      - /share/CACHEDEV1_DATA/plex/movies4k:/movies
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads4k:/downloads
+    ports:
+      - 12700:7878
+    restart: unless-stopped
