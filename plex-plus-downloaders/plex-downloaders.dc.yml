@@ -1,0 +1,101 @@
+version: "3"
+services:
+  radarr4k:
+    image: linuxserver/radarr:version-3.0.0.4107
+    container_name: radarr4k
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/radarr/config4k:/config
+      - /share/CACHEDEV1_DATA/plex/movies4k:/movies
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads4k:/downloads
+    ports:
+      - 12710:7878
+    depends_on:
+      - sabnzbd4k
+      - nzbhydra2
+    restart: unless-stopped
+  radarr1080:
+    image: linuxserver/radarr:version-3.0.0.4107
+    container_name: radarr1080
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/radarr/config1080:/config
+      - /share/CACHEDEV1_DATA/plex/movies1080:/movies
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads1080:/downloads
+    ports:
+      - 12711:7878
+    depends_on:
+      - sabnzbd1080
+      - nzbhydra2
+    restart: unless-stopped
+  sonarr1080:
+    image: linuxserver/sonarr:version-3.0.4.1011
+    container_name: sonarr1080
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/sonarr/config1080:/config
+      - /share/CACHEDEV1_DATA/plex/series1080:/tv
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads1080:/downloads
+    ports:
+      - 12720:8989
+    depends_on:
+      - sabnzbd1080
+      - nzbhydra2
+    restart: unless-stopped
+  sabnzbd4k:
+    image: linuxserver/sabnzbd:version-3.1.1
+    container_name: sabnzbd4k
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/sabnzbd/config4k:/config
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads4k:/downloads
+      - /share/CACHEDEV1_DATA/sabnzbd/incomplete-downloads4k:/incomplete-downloads #optional
+    ports:
+      - 12730:8080
+      - 12731:9090
+    restart: unless-stopped
+  sabnzbd1080:
+    image: linuxserver/sabnzbd:version-3.1.1
+    container_name: sabnzbd1080
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/sabnzbd/config1080:/config
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads1080:/downloads
+      - /share/CACHEDEV1_DATA/sabnzbd/incomplete-downloads1080:/incomplete-downloads #optional
+    ports:
+      - 12732:8080
+      - 12733:9090
+    restart: unless-stopped
+  nzbhydra2:
+    image: hotio/nzbhydra2:release-3.5.1
+    container_name: nzbhydra2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Detroit
+      - ARGS=""
+      - DEBUG="no"
+    volumes:
+      - /share/CACHEDEV1_DATA/nzbhydra2/config:/config
+    ports:
+      - 12740:5076
+    restart: unless-stopped

@@ -1,0 +1,18 @@
+version: "3"
+services:
+  plexonly:
+    image: linuxserver/plex:version-1.20.5.3600-47c0d9038
+    container_name: plexonly
+    network_mode: host
+    environment:
+      - PUID=0
+      - PGID=0
+      - VERSION=docker
+      - UMASK_SET=022 #optional
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/plex/config:/config
+      - /share/CACHEDEV1_DATA/plex/movies4k:/movies4k
+      - /share/CACHEDEV1_DATA/plex/movies1080:/movies1080
+      - /share/CACHEDEV1_DATA/plex/series1080:/tv
+    restart: unless-stopped

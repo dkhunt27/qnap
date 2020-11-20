@@ -1,6 +1,6 @@
 version: "3"
 services:
-  radarr4k:
+  speedtest:
     image: roest/docker-speedtest-analyser
     container_name: speedtest
     network_mode: bridge
