@@ -1,0 +1,15 @@
+version: "3"
+services:
+  plexonly:
+    image: linuxserver/tautulli:version-1ab87e53
+    container_name: tautullionly
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/tautulli/config:/config
+      - /share/CACHEDEV1_DATA/tautulli/logs:/logs
+    ports:
+      - 12701:8181
+    restart: unless-stopped

@@ -1,7 +1,7 @@
 version: "3"
 services:
   plexonly:
-    image: linuxserver/plex:version-1.20.5.3600-47c0d9038
+    image: linuxserver/plex:version-1.21.0.3616-d87012962
     container_name: plexonly
     network_mode: host
     environment:
@@ -15,4 +15,6 @@ services:
       - /share/CACHEDEV1_DATA/plex/movies4k:/movies4k
       - /share/CACHEDEV1_DATA/plex/movies1080:/movies1080
       - /share/CACHEDEV1_DATA/plex/series1080:/tv
+    # ports:
+    #   - 12700:32400
     restart: unless-stopped
