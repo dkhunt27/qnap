@@ -1,8 +1,13 @@
 version: "3"
 services:
-  plexonly:
-    image: linuxserver/plex:version-1.21.0.3616-d87012962
-    container_name: plexonly
+  # latest versions as of 12/15/2020
+  #
+  # ports: 
+  #  plex: 32400
+  #
+  plex:
+    image: linuxserver/plex:version-1.21.1.3766-7e23ef53c
+    container_name: plex
     network_mode: host
     environment:
       - PUID=0

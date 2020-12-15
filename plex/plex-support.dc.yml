@@ -1,7 +1,19 @@
 version: "3"
 services:
+  # latest versions as of 12/15/2020
+  #
+  # ports:
+  #  tautulli: 12701
+  #  ombi: 12702
+  #  radarr4k: 12710
+  #  radarr1080: 12711
+  #  sonarr1080: 12720
+  #  sabnzbd4k: 12730, 12731
+  #  sabnzbd1080: 12732, 12733
+  #  nzbhydra2: 12740
+  #
   radarr4k:
-    image: linuxserver/radarr:version-3.0.0.4107
+    image: linuxserver/radarr:version-3.0.1.4263
     container_name: radarr4k
     environment:
       - PUID=0
@@ -19,7 +31,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   radarr1080:
-    image: linuxserver/radarr:version-3.0.0.4107
+    image: linuxserver/radarr:version-3.0.1.4263
     container_name: radarr1080
     environment:
       - PUID=0
@@ -37,7 +49,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr1080:
-    image: linuxserver/sonarr:version-3.0.4.1011
+    image: linuxserver/sonarr:version-3.0.4.1026
     container_name: sonarr1080
     environment:
       - PUID=0
@@ -85,7 +97,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-3.5.1
+    image: hotio/nzbhydra2:release-3.8.0
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -98,4 +110,34 @@ services:
       - /share/CACHEDEV1_DATA/nzbhydra2/config:/config
     ports:
       - 12740:5076
+    restart: unless-stopped
+  tautulli:
+    image: linuxserver/tautulli:version-b5ebe759
+    container_name: tautulli
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/tautulli/config:/config
+      - /share/CACHEDEV1_DATA/tautulli/logs:/logs
+    ports:
+      - 12701:8181
+    restart: unless-stopped
+  ombi:
+    image: linuxserver/ombi:version-v4.0.767
+    container_name: ombi
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - BASE_URL=/ombi #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/ombi/config:/config
+    ports:
+      - 12702:3579
+    depends_on:
+      - sonarr1080
+      - radarr1080
+      - radarr4k
     restart: unless-stopped
