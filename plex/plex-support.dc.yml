@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 12/15/2020
+  # latest versions as of 3/7/2021
   #
   # ports:
   #  tautulli: 12701
@@ -13,7 +13,7 @@ services:
   #  nzbhydra2: 12740
   #
   radarr4k:
-    image: linuxserver/radarr:version-3.0.1.4263
+    image: linuxserver/radarr:version-3.0.2.4552
     container_name: radarr4k
     environment:
       - PUID=0
@@ -31,7 +31,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   radarr1080:
-    image: linuxserver/radarr:version-3.0.1.4263
+    image: linuxserver/radarr:version-3.0.2.4552
     container_name: radarr1080
     environment:
       - PUID=0
@@ -49,7 +49,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr1080:
-    image: linuxserver/sonarr:version-3.0.4.1026
+    image: linuxserver/sonarr:preview-version-3.0.4.1139
     container_name: sonarr1080
     environment:
       - PUID=0
@@ -67,7 +67,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
-    image: linuxserver/sabnzbd:version-3.1.1
+    image: linuxserver/sabnzbd:version-3.2.0
     container_name: sabnzbd4k
     environment:
       - PUID=0
@@ -82,7 +82,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   sabnzbd1080:
-    image: linuxserver/sabnzbd:version-3.1.1
+    image: linuxserver/sabnzbd:version-3.2.0
     container_name: sabnzbd1080
     environment:
       - PUID=0
@@ -97,7 +97,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-3.8.0
+    image: hotio/nzbhydra2:release-3.13.0
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -112,7 +112,7 @@ services:
       - 12740:5076
     restart: unless-stopped
   tautulli:
-    image: linuxserver/tautulli:version-b5ebe759
+    image: linuxserver/tautulli:version-v2.6.6
     container_name: tautulli
     environment:
       - PUID=0

@@ -1,12 +1,12 @@
 version: "3"
 services:
-  # latest versions as of 12/15/2020
+  # latest versions as of 3/7/2021
   #
   # ports: 
   #  plex: 32400
   #
   plex:
-    image: linuxserver/plex:version-1.21.1.3766-7e23ef53c
+    image: linuxserver/plex:version-1.21.4.4079-1b7748a7b
     container_name: plex
     network_mode: host
     environment:
