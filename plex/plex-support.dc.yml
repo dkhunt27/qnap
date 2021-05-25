@@ -1,19 +1,27 @@
 version: "3"
 services:
-  # latest versions as of 3/7/2021
+  # latest versions as of 5/25/2021
   #
   # ports:
   #  tautulli: 12701
   #  ombi: 12702
   #  radarr4k: 12710
   #  radarr1080: 12711
-  #  sonarr1080: 12720
+  #  sonarr1080: 12720 
   #  sabnzbd4k: 12730, 12731
   #  sabnzbd1080: 12732, 12733
   #  nzbhydra2: 12740
   #
+  # versions:
+  #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
+  #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
+  #  radarr: https://hub.docker.com/r/linuxserver/radarr/tags?page=1&ordering=name&name=version
+  #  sonarr: https://hub.docker.com/r/linuxserver/sonarr/tags?page=1&ordering=name&name=version
+  #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
+  #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #
   radarr4k:
-    image: linuxserver/radarr:version-3.0.2.4552
+    image: linuxserver/radarr:version-3.2.0.5048
     container_name: radarr4k
     environment:
       - PUID=0
@@ -31,7 +39,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   radarr1080:
-    image: linuxserver/radarr:version-3.0.2.4552
+    image: linuxserver/radarr:version-3.2.0.5048
     container_name: radarr1080
     environment:
       - PUID=0
@@ -49,7 +57,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr1080:
-    image: linuxserver/sonarr:preview-version-3.0.4.1139
+    image: linuxserver/sonarr:version-3.0.6.1196
     container_name: sonarr1080
     environment:
       - PUID=0
@@ -67,7 +75,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
-    image: linuxserver/sabnzbd:version-3.2.0
+    image: linuxserver/sabnzbd:version-3.2.1
     container_name: sabnzbd4k
     environment:
       - PUID=0
@@ -82,7 +90,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   sabnzbd1080:
-    image: linuxserver/sabnzbd:version-3.2.0
+    image: linuxserver/sabnzbd:version-3.2.1
     container_name: sabnzbd1080
     environment:
       - PUID=0
@@ -97,7 +105,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-3.13.0
+    image: hotio/nzbhydra2:release-3.14.2
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -112,7 +120,7 @@ services:
       - 12740:5076
     restart: unless-stopped
   tautulli:
-    image: linuxserver/tautulli:version-v2.6.6
+    image: linuxserver/tautulli:version-v2.7.3
     container_name: tautulli
     environment:
       - PUID=0
