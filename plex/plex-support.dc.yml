@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 11/11/2021
+  # latest versions as of 11/11/2021 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise)
   #
   # ports:
   #  tautulli: 12701

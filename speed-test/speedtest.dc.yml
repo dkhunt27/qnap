@@ -1,13 +1,22 @@
 version: "3"
 services:
-  speedtest:
-    image: roest/docker-speedtest-analyser
-    container_name: speedtest
+  scheduled:
+    image: dkhunt27/speedtest-scheduled-job
+    container_name: scheduled-job
     network_mode: bridge
-    volumes:
-      - /share/CACHEDEV1_DATA/speedtest:/var/www/html/data
-    ports:
-      - 8081:80
-      - 4343:443
     environment:
-      - CRONJOB_ITERATION=15
+      - SET_INTERVAL_MILLISECONDS=120000
+    volumes:
+      - /share/CACHEDEV1_DATA/speedtest/db:/app/data
+  ui:
+    image: dkhunt27/speedtest-ui
+    container_name: ui
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/speedtest/db:/config/www/db
+    ports:
+      - '8088:80'
