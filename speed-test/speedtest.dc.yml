@@ -1,16 +1,16 @@
 version: "3"
 services:
   scheduled:
-    image: dkhunt27/speedtest-scheduled-job
-    container_name: scheduled-job
+    image: dkhunt27/speedtest-via-wowway-scrape
+    container_name: speedtest-via-wowway-scrape
     network_mode: bridge
     environment:
-      - SET_INTERVAL_MILLISECONDS=120000
+      - SPEEDTEST_INTERVAL_MINUTES=60
     volumes:
       - /share/CACHEDEV1_DATA/speedtest/db:/app/data
   ui:
     image: dkhunt27/speedtest-ui
-    container_name: ui
+    container_name: speedtest-ui
     environment:
       - PUID=0
       - PGID=0
