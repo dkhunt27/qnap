@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 11/11/2021 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise)
+  # latest versions as of 1/8/2022 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise)
   #
   # ports:
   #  tautulli: 12701
@@ -75,7 +75,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
-    image: linuxserver/sabnzbd:version-3.4.2
+    image: linuxserver/sabnzbd:version-3.2.1
     container_name: sabnzbd4k
     environment:
       - PUID=0
@@ -90,7 +90,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   sabnzbd1080:
-    image: linuxserver/sabnzbd:version-3.4.2
+    image: linuxserver/sabnzbd:version-3.2.1
     container_name: sabnzbd1080
     environment:
       - PUID=0
@@ -105,7 +105,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-3.17.3
+    image: hotio/nzbhydra2:release-3.18.4
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -120,7 +120,7 @@ services:
       - 12740:5076
     restart: unless-stopped
   tautulli:
-    image: linuxserver/tautulli:version-v2.7.7
+    image: linuxserver/tautulli:version-v2.8.1
     container_name: tautulli
     environment:
       - PUID=0
