@@ -1,15 +1,18 @@
 version: "3"
 services:
-  # latest versions as of 1/8/2022 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise)
+  # latest versions as of 1/29/2022 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise, tried 3.4.2 and 3.5.0)
   #
   # ports:
   #  tautulli: 12701
   #  ombi: 12702
   #  radarr4k: 12710
   #  radarr1080: 12711
+  #  radarrKids: 12712
   #  sonarr1080: 12720 
+  #  sonarrKids: 12721 
   #  sabnzbd4k: 12730, 12731
   #  sabnzbd1080: 12732, 12733
+  #  sabnzbdKids: 12734, 12735
   #  nzbhydra2: 12740
   #
   # versions:
@@ -56,6 +59,24 @@ services:
       - sabnzbd1080
       - nzbhydra2
     restart: unless-stopped
+  radarrKids:
+    image: linuxserver/radarr:version-3.2.2.5080
+    container_name: radarrKids
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/radarr/configKids:/config
+      - /share/CACHEDEV1_DATA/plex/moviesKids:/movies
+      - /share/CACHEDEV1_DATA/sabnzbd/downloadsKids:/downloads
+    ports:
+      - 12712:7878
+    depends_on:
+      - sabnzbdKids
+      - nzbhydra2
+    restart: unless-stopped
   sonarr1080:
     image: linuxserver/sonarr:version-3.0.6.1342
     container_name: sonarr1080
@@ -72,6 +93,24 @@ services:
       - 12720:8989
     depends_on:
       - sabnzbd1080
+      - nzbhydra2
+    restart: unless-stopped
+  sonarrKids:
+    image: linuxserver/sonarr:version-3.0.6.1342
+    container_name: sonarrKids
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/sonarr/configKids:/config
+      - /share/CACHEDEV1_DATA/plex/seriesKids:/tv
+      - /share/CACHEDEV1_DATA/sabnzbd/downloadsKids:/downloads
+    ports:
+      - 12721:8989
+    depends_on:
+      - sabnzbdKids
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
@@ -104,8 +143,23 @@ services:
       - 12732:8080
       - 12733:9090
     restart: unless-stopped
+  sabnzbdKids:
+    image: linuxserver/sabnzbd:version-3.2.1
+    container_name: sabnzbdKids
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/sabnzbd/configKids:/config
+      - /share/CACHEDEV1_DATA/sabnzbd/downloadsKids:/downloads
+      - /share/CACHEDEV1_DATA/sabnzbd/incomplete-downloadsKids:/incomplete-downloads #optional
+    ports:
+      - 12734:8080
+      - 12735:9090
+    restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-3.18.4
+    image: hotio/nzbhydra2:release-4.0.1
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -147,5 +201,4 @@ services:
     depends_on:
       - sonarr1080
       - radarr1080
-      - radarr4k
     restart: unless-stopped

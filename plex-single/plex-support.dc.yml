@@ -1,0 +1,115 @@
+version: "3"
+services:
+  # latest versions as of 1/29/2022 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise, tried 3.4.2 and 3.5.0)
+  #
+  # ports:
+  #  tautulli: 12701
+  #  ombi: 12702
+  #  radarr: 12710
+  #  sonarr: 12720 
+  #  sabnzbd: 12730, 12731
+  #  nzbhydra2: 12740
+  #
+  # versions:
+  #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
+  #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
+  #  radarr: https://hub.docker.com/r/linuxserver/radarr/tags?page=1&ordering=name&name=version
+  #  sonarr: https://hub.docker.com/r/linuxserver/sonarr/tags?page=1&ordering=name&name=version
+  #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
+  #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #
+  radarr:
+    image: linuxserver/radarr:version-3.2.2.5080
+    container_name: radarr
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/radarr/config:/config
+      - /share/CACHEDEV1_DATA/plex/movies:/movies
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads:/downloads
+    ports:
+      - 12710:7878
+    depends_on:
+      - sabnzbd
+      - nzbhydra2
+    restart: unless-stopped
+  sonarr:
+    image: linuxserver/sonarr:version-3.0.6.1342
+    container_name: sonarr
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - UMASK_SET=022 #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/sonarr/config:/config
+      - /share/CACHEDEV1_DATA/plex/series:/tv
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads:/downloads
+    ports:
+      - 12720:8989
+    depends_on:
+      - sabnzbd
+      - nzbhydra2
+    restart: unless-stopped
+  sabnzbd:
+    image: linuxserver/sabnzbd:version-3.2.1
+    container_name: sabnzbd
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/sabnzbd/config:/config
+      - /share/CACHEDEV1_DATA/sabnzbd/downloads:/downloads
+      - /share/CACHEDEV1_DATA/sabnzbd/incomplete-downloads:/incomplete-downloads #optional
+    ports:
+      - 12730:8080
+      - 12731:9090
+    restart: unless-stopped
+  nzbhydra2:
+    image: hotio/nzbhydra2:release-4.0.1
+    container_name: nzbhydra2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Detroit
+      - ARGS=""
+      - DEBUG="no"
+    volumes:
+      - /share/CACHEDEV1_DATA/nzbhydra2/config:/config
+    ports:
+      - 12740:5076
+    restart: unless-stopped
+  tautulli:
+    image: linuxserver/tautulli:version-v2.8.1
+    container_name: tautulli
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/tautulli/config:/config
+      - /share/CACHEDEV1_DATA/tautulli/logs:/logs
+    ports:
+      - 12701:8181
+    restart: unless-stopped
+  ombi:
+    image: linuxserver/ombi:version-v4.3.3
+    container_name: ombi
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+      - BASE_URL=/ombi #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/ombi/config:/config
+    ports:
+      - 12702:3579
+    depends_on:
+      - sonarr
+      - radarr
+    restart: unless-stopped

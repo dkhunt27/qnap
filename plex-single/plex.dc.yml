@@ -1,0 +1,27 @@
+version: "3"
+services:
+  # latest versions as of 1/29/2022
+  #
+  # ports: 
+  #  plex: 32400
+  #
+  # versions:
+  #  plex: https://hub.docker.com/r/linuxserver/plex/tags?page=1&ordering=name&name=version
+  #
+  plex:
+    image: linuxserver/plex:version-1.25.3.5409-f11334058
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=0
+      - PGID=0
+      - VERSION=docker
+      - UMASK_SET=022 #optional
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /share/CACHEDEV1_DATA/plex/config:/config
+      - /share/CACHEDEV1_DATA/plex/movies:/movies
+      - /share/CACHEDEV1_DATA/plex/series:/tv
+    # ports:
+    #   - 12700:32400
+    restart: unless-stopped

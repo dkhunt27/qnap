@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 1/8/2022
+  # latest versions as of 1/29/2022
   #
   # ports: 
   #  plex: 32400
@@ -9,7 +9,7 @@ services:
   #  plex: https://hub.docker.com/r/linuxserver/plex/tags?page=1&ordering=name&name=version
   #
   plex:
-    image: linuxserver/plex:version-1.25.2.5319-c43dc0277
+    image: linuxserver/plex:version-1.25.3.5409-f11334058
     container_name: plex
     network_mode: host
     environment:
@@ -20,9 +20,11 @@ services:
       - PLEX_CLAIM= #optional
     volumes:
       - /share/CACHEDEV1_DATA/plex/config:/config
+      - /share/CACHEDEV1_DATA/plex/moviesKids:/moviesKids
       - /share/CACHEDEV1_DATA/plex/movies4k:/movies4k
       - /share/CACHEDEV1_DATA/plex/movies1080:/movies1080
       - /share/CACHEDEV1_DATA/plex/series1080:/tv
+      - /share/CACHEDEV1_DATA/plex/seriesKids:/tvKids
     # ports:
     #   - 12700:32400
     restart: unless-stopped
