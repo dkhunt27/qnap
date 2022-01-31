@@ -62,3 +62,17 @@ To update your qnap to the latest version, you will need to copy the files from 
 7) (qnap) Replace the entire YAML with the copied file contents from github (should be in clipboard already, so CTRL+A, CTRL+V)
 8) (qnap) Click `Validate YAML` and then click `Apply`
 9) (qnap) This might take a few seconds for `speedtest` to start running again, but you are done and `Speed Test` has been upgraded
+
+### Installing from scratch
+
+- Install Container Station
+- Create new application called "plexsupport" and paste plex-single/plex-support.dc.yml
+- Create new application called "plex" and paste plex-single/plex.dc.yml
+- Follow the configuration screens for setting up the various applications
+- When they are online, create the following Shared Folders in FileStation for convenience
+  - name: sonarr path: /sonarr
+  - name: radarr path: /radarr
+  - name: sabnzbd path: /sabnzbd
+  - name: nzbhydra2 path /nzbhydra2
+  - name: plex path: /plex
+- When setting up plex, point your TV library to /plex/series folder and Movie library to /plex/movies folder
