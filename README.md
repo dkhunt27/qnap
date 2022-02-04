@@ -75,4 +75,6 @@ To update your qnap to the latest version, you will need to copy the files from 
   - name: sabnzbd path: /sabnzbd
   - name: nzbhydra2 path /nzbhydra2
   - name: plex path: /plex
-- When setting up plex, point your TV library to /plex/series folder and Movie library to /plex/movies folder
+- When setting up plex, point your TV Shows library to /tv folder and Movies library to /movies folder
+  - /tv in plex app actually maps to /plex/series in File Station
+  - /movies in plex app actually maps to /plex/movies in File Status
