@@ -1,6 +1,7 @@
 version: "3"
 services:
-  # latest versions as of 1/29/2022 except sabnzbd reverted back to 3.2.1 (radarr was getting 403 errors otherwise, tried 3.4.2 and 3.5.0)
+  # latest versions as of 4/22/2022 
+  #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
   #  tautulli: 12701
@@ -16,15 +17,15 @@ services:
   #  nzbhydra2: 12740
   #
   # versions:
-  #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
-  #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
   #  radarr: https://hub.docker.com/r/linuxserver/radarr/tags?page=1&ordering=name&name=version
   #  sonarr: https://hub.docker.com/r/linuxserver/sonarr/tags?page=1&ordering=name&name=version
   #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
   #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
+  #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
   #
   radarr4k:
-    image: linuxserver/radarr:version-3.2.2.5080
+    image: linuxserver/radarr:version-4.1.0.6175
     container_name: radarr4k
     environment:
       - PUID=0
@@ -42,7 +43,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   radarr1080:
-    image: linuxserver/radarr:version-3.2.2.5080
+    image: linuxserver/radarr:version-4.1.0.6175
     container_name: radarr1080
     environment:
       - PUID=0
@@ -60,7 +61,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   radarrKids:
-    image: linuxserver/radarr:version-3.2.2.5080
+    image: linuxserver/radarr:version-4.1.0.6175
     container_name: radarrKids
     environment:
       - PUID=0
@@ -78,7 +79,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr1080:
-    image: linuxserver/sonarr:version-3.0.6.1342
+    image: linuxserver/sonarr:version-3.0.7.1477
     container_name: sonarr1080
     environment:
       - PUID=0
@@ -96,7 +97,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarrKids:
-    image: linuxserver/sonarr:version-3.0.6.1342
+    image: linuxserver/sonarr:version-3.0.7.1477
     container_name: sonarrKids
     environment:
       - PUID=0
@@ -114,7 +115,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
-    image: linuxserver/sabnzbd:version-3.2.1
+    image: linuxserver/sabnzbd:version-3.5.3
     container_name: sabnzbd4k
     environment:
       - PUID=0
@@ -129,7 +130,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   sabnzbd1080:
-    image: linuxserver/sabnzbd:version-3.2.1
+    image: linuxserver/sabnzbd:version-3.5.3
     container_name: sabnzbd1080
     environment:
       - PUID=0
@@ -144,7 +145,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   sabnzbdKids:
-    image: linuxserver/sabnzbd:version-3.2.1
+    image: linuxserver/sabnzbd:version-3.5.3
     container_name: sabnzbdKids
     environment:
       - PUID=0
@@ -159,7 +160,7 @@ services:
       - 12735:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-4.0.1
+    image: hotio/nzbhydra2:release-4.3.0
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -174,7 +175,7 @@ services:
       - 12740:5076
     restart: unless-stopped
   tautulli:
-    image: linuxserver/tautulli:version-v2.8.1
+    image: linuxserver/tautulli:version-v2.9.7
     container_name: tautulli
     environment:
       - PUID=0
