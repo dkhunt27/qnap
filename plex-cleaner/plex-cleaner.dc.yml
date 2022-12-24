@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  plexcleaner:
+    image: ptr727/plexcleaner
+    container_name: plexcleaner
+    command: /PlexCleaner/PlexCleaner --settingsfile /config/PlexCleaner.json defaultsettings
+    volumes:
+      - /share/CACHEDEV1_DATA/plexCleaner:/config
+      - /share/CACHEDEV1_DATA/plex/movies:/media:rw   
+
+
+docker run \
+  -it \
+  --rm \
+  --pull always \
+  --name PlexCleaner \
+  --volume /share/CACHEDEV1_DATA/plexCleaner:/config  \
+  --volume /share/CACHEDEV1_DATA/plex/movies:/media:rw  \
+  ptr727/plexcleaner \
+  /bin/bash
+
+  /PlexCleaner/PlexCleaner \
+  --settingsfile /config/PlexCleaner.json \
+  --logfile /config/PlexCleaner.log \
+  process \
+  --mediafiles '/media/Ant-Man (2015)'

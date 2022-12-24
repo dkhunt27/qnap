@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  optimizer:
+    image: bridmg/conv2mp4
+    container_name: conv2mp4
+    volumes:
+      - ./conv2mp4/cfg:/cfg          #Local path to your config file
+      - ./conv2mp4/log:/log          #Optional, allows for persistent log
+      - ./conv2mp4/ignore:/ignore    #Optional, allows for persistent ignore list
+      - ./conv2mp4/lock:/lock        #Optional, allows for persistent lock file
+      - ./movies:/media               #Path to media to be converted
+      - /etc/localtime:/etc/localtime:ro    #Syncs container time to host time
+    ports:
+      - 8082:8282
+    restart: unless-stopped

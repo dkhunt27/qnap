@@ -9,8 +9,8 @@ services:
   #   volumes:
   #     - /share/CACHEDEV1_DATA/speedtest/db:/app/data
   scheduled:
-    image: dkhunt27/speedtest-via-speed-test
-    container_name: speedtest-via-speed-test
+    image: dkhunt27/speedtest-via-speedtest-net
+    container_name: speedtest-via-speedtest-net
     network_mode: bridge
     environment:
       - SPEEDTEST_INTERVAL_MINUTES=60
@@ -30,11 +30,11 @@ services:
     ports:
       - '8088:80'
     restart: unless-stopped
-  openspeedtest: 
-    image: openspeedtest/latest
-    container_name: openspeedtest
-    ports:
-      - '8086:3000'
-      - '8087:3001'
-    restart: unless-stopped
+  # openspeedtest: 
+  #   image: openspeedtest/latest
+  #   container_name: openspeedtest
+  #   ports:
+  #     - '8086:3000'
+  #     - '8087:3001'
+  #   restart: unless-stopped
 

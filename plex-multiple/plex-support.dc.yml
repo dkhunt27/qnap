@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 4/22/2022 
+  # latest versions as of 8/4/2022 
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
@@ -79,7 +79,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr1080:
-    image: linuxserver/sonarr:version-3.0.7.1477
+    image: linuxserver/sonarr:version-3.0.8.1507
     container_name: sonarr1080
     environment:
       - PUID=0
@@ -97,7 +97,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarrKids:
-    image: linuxserver/sonarr:version-3.0.7.1477
+    image: linuxserver/sonarr:version-3.0.8.1507
     container_name: sonarrKids
     environment:
       - PUID=0
@@ -115,7 +115,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd4k:
-    image: linuxserver/sabnzbd:version-3.5.3
+    image: linuxserver/sabnzbd:version-3.6.0
     container_name: sabnzbd4k
     environment:
       - PUID=0
@@ -130,7 +130,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   sabnzbd1080:
-    image: linuxserver/sabnzbd:version-3.5.3
+    image: linuxserver/sabnzbd:version-3.6.0
     container_name: sabnzbd1080
     environment:
       - PUID=0
@@ -145,7 +145,7 @@ services:
       - 12733:9090
     restart: unless-stopped
   sabnzbdKids:
-    image: linuxserver/sabnzbd:version-3.5.3
+    image: linuxserver/sabnzbd:version-3.6.0
     container_name: sabnzbdKids
     environment:
       - PUID=0
@@ -160,7 +160,7 @@ services:
       - 12735:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-4.3.0
+    image: hotio/nzbhydra2:release-4.4.0
     container_name: nzbhydra2
     environment:
       - PUID=1000

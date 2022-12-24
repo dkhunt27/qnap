@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  optimizer:
+    image: jlesage/handbrake
+    container_name: handbrake
+    environment:
+      - USER_ID=0
+      - GROUP_ID=0
+      - UMASK=022
+      - TZ=America/Detroit
+      - KEEP_APP_RUNNING=1
+    volumes:
+      - /share/CACHEDEV1_DATA/plex-processing/config:/config
+      - /share/CACHEDEV1_DATA/plex-processing/storage:/storage \
+      - /share/CACHEDEV1_DATA/plex-processing/watch:/watch \
+      - /share/CACHEDEV1_DATA/plex-processing/output:/output \
+    ports:
+      - 5800:5800
+    restart: unless-stopped

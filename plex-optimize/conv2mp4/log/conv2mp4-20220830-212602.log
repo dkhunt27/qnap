@@ -1,0 +1,46 @@
+conv2mp4 - platform: docker ver: 5.1.0 rev: c509ce89b78d7536590290c61c4c9ec8e5586cf5
+https://gitlab.com/BrianDMG/conv2mp4 | https://hub.docker.com/repository/docker/bridmg/conv2mp4
+------------------------------------------------------------------------------------
+>>>>> New Session (started 08/30/22 21:26:02)
+
+Log rotation: deleting /log/usageStatistics.yaml
+
+There are 3 file(s) in the queue:
+
+1. /media/Minions (2015)/Minions (2015) 1080p NL Audio & Subs.mkv
+2. /media/Minions The Rise of Gru (2022)/Plex Versions/Optimized for TV/Minions_ The Rise of Gru (2022).mp4
+3. /media/Minions The Rise of Gru (2022)/Minions.The.Rise.Of.Gru.2022.REPACK.1080p.WEB.h264-RUMOUR.mkv
+
+------------------------------------------------------------------------------------
+08/30/22 21:26:03 Processing - /media/Minions (2015)/Minions (2015) 1080p NL Audio & Subs.mkv
+08/30/22 21:26:03 File 1 of 3 - Total queue 33.33%
+08/30/22 21:26:03 Video: H264, Audio: AC3. Encoding audio to AAC
+08/30/22 21:37:52 /media/Minions (2015)/Minions (2015) 1080p NL Audio & Subs.mkv deleted.
+08/30/22 21:37:52 /media/Minions (2015)/Minions (2015) 1080p NL Audio & Subs.mp4 created.
+08/30/22 21:37:52 New file is 136.34MB smaller.
+08/30/22 21:37:52 Current cumulative storage difference: -136.34MB
+------------------------------------------------------------------------------------
+08/30/22 21:37:52 Processing - /media/Minions The Rise of Gru (2022)/Plex Versions/Optimized for TV/Minions_ The Rise of Gru (2022).mp4
+08/30/22 21:37:52 File 2 of 3 - Total queue 66.67%
+08/30/22 21:37:53 MP4 already compliant.
+08/30/22 21:37:53 Added file to ignore list.
+------------------------------------------------------------------------------------
+08/30/22 21:37:53 Processing - /media/Minions The Rise of Gru (2022)/Minions.The.Rise.Of.Gru.2022.REPACK.1080p.WEB.h264-RUMOUR.mkv
+08/30/22 21:37:53 File 3 of 3 - Total queue 100%
+08/30/22 21:37:54 Video: H264, Audio: EAC3. Encoding audio to AAC
+08/30/22 21:43:40 /media/Minions The Rise of Gru (2022)/Minions.The.Rise.Of.Gru.2022.REPACK.1080p.WEB.h264-RUMOUR.mkv deleted.
+08/30/22 21:43:40 /media/Minions The Rise of Gru (2022)/Minions.The.Rise.Of.Gru.2022.REPACK.1080p.WEB.h264-RUMOUR.mp4 created.
+08/30/22 21:43:40 New file is 230.31MB smaller.
+08/30/22 21:43:40 Current cumulative storage difference: -366.65MB
+
+____________________________________________________________________________________
+
+08/30/22 21:43:40 Total cumulative storage difference: -366.65MB
+
+02:58:29 of video processed in 00:17:38
+Average conversion speed of 10.12x
+
+Audio-only encodes: 2
+Compliant files: 1
+
+____________________________________________________________________________________
