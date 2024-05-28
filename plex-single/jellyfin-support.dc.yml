@@ -1,0 +1,69 @@
+version: "3"
+services:
+  # latest versions as of 05/27/2024
+  #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
+  #
+  # ports:
+  #  whisparr: 12769
+  #  sabnzbd: 12770, 12771
+  #  nzbhydra2: 12772
+  #
+  # versions:
+  #  whisparr: https://hub.docker.com/r/hotio/whisparr/tags?page=1&name=v
+  #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
+  #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #
+  whisparr:
+    image: hotio/whisparr:v3-3.0.0.545
+    container_name: whisparr
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=002
+      - TZ=America/Detroit
+      - ARGS=""
+      - DEBUG="no"
+    volumes:
+      - /share/CACHEDEV1_DATA/whisparr/config:/config
+      - /share/CACHEDEV1_DATA/jellyfin/media:/scenes
+      - /share/CACHEDEV1_DATA/jellyfin/mediaAddtl:/mediaAddtl
+      - /share/CACHEDEV1_DATA/sabnzbd-jf/downloads:/downloads
+    ports:
+      - 12769:6969
+    depends_on:
+      - sabnzbdjf
+      - nzbhydra2jf
+    restart: unless-stopped
+  sabnzbdjf:
+    image: linuxserver/sabnzbd:version-4.3.1
+    container_name: sabnzbdjf
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Detroit
+    volumes:
+      - /share/CACHEDEV1_DATA/sabnzbd-jf/config:/config
+      - /share/CACHEDEV1_DATA/sabnzbd-jf/downloads:/downloads
+      - /share/CACHEDEV1_DATA/sabnzbd-jf/incomplete-downloads:/incomplete-downloads #optional
+    ports:
+      - 12770:8080
+      - 12771:9090
+    restart: unless-stopped
+  nzbhydra2jf:
+    image: hotio/nzbhydra2:release-7.1.0
+    container_name: nzbhydra2jf
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Detroit
+      - ARGS=""
+      - DEBUG="no"
+    volumes:
+      - /share/CACHEDEV1_DATA/nzbhydra2-jf/config:/config
+    ports:
+      - 12772:5076
+    restart: unless-stopped
+
+
+
