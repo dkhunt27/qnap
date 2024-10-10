@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 05/27/2024
+  # latest versions as of 10/09/2024
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
@@ -20,7 +20,7 @@ services:
   #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
   #
   radarr:
-    image: linuxserver/radarr:version-5.6.0.8846
+    image: linuxserver/radarr:version-5.9.1.9070
     container_name: radarr
     environment:
       - PUID=0
@@ -38,7 +38,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr:
-    image: linuxserver/sonarr:version-4.0.4.1491
+    image: linuxserver/sonarr:version-4.0.9.2244
     container_name: sonarr
     environment:
       - PUID=0
@@ -56,7 +56,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd:
-    image: linuxserver/sabnzbd:version-4.3.1
+    image: linuxserver/sabnzbd:version-4.3.3
     container_name: sabnzbd
     environment:
       - PUID=0
@@ -71,7 +71,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-7.1.0
+    image: hotio/nzbhydra2:release-7.7.0
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -99,7 +99,7 @@ services:
       - 12701:8181
     restart: unless-stopped
   ombi:
-    image: linuxserver/ombi:version-v4.43.5
+    image: linuxserver/ombi:version-v4.44.1
     container_name: ombi
     environment:
       - PUID=0

@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 05/27/2024
+  # latest versions as of 10/09/2024
   #
   # ports: 
   #  jellyfin: 8096
@@ -9,7 +9,7 @@ services:
   #  jellyfin: https://hub.docker.com/r/jellyfin/jellyfin
   #
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:2024100705
     container_name: jellyfin
     user: "$PUID:$PGID"
     network_mode: 'host'

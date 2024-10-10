@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 05/27/2024
+  # latest versions as of 10/09/2024
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
@@ -14,7 +14,7 @@ services:
   #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
   #
   whisparr:
-    image: hotio/whisparr:v3-3.0.0.545
+    image: hotio/whisparr:v3-3.0.0.614
     container_name: whisparr
     environment:
       - PUID=0
@@ -35,7 +35,7 @@ services:
       - nzbhydra2jf
     restart: unless-stopped
   sabnzbdjf:
-    image: linuxserver/sabnzbd:version-4.3.1
+    image: linuxserver/sabnzbd:version-4.3.3
     container_name: sabnzbdjf
     environment:
       - PUID=0
@@ -50,7 +50,7 @@ services:
       - 12771:9090
     restart: unless-stopped
   nzbhydra2jf:
-    image: hotio/nzbhydra2:release-7.1.0
+    image: hotio/nzbhydra2:release-7.7.0
     container_name: nzbhydra2jf
     environment:
       - PUID=1000
