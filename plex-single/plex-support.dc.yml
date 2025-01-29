@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of 10/09/2024
+  # latest versions as of 01/29/2025
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
@@ -56,7 +56,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd:
-    image: linuxserver/sabnzbd:version-4.3.3
+    image: linuxserver/sabnzbd:version-4.4.1
     container_name: sabnzbd
     environment:
       - PUID=0
@@ -71,7 +71,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-7.7.0
+    image: hotio/nzbhydra2:release-7.12.2
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -99,7 +99,7 @@ services:
       - 12701:8181
     restart: unless-stopped
   ombi:
-    image: linuxserver/ombi:version-v4.44.1
+    image: linuxserver/ombi:version-v4.47.1
     container_name: ombi
     environment:
       - PUID=0
