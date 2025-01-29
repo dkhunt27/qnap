@@ -9,7 +9,7 @@ services:
   #  plex: https://hub.docker.com/r/linuxserver/plex/tags?page=1&ordering=name&name=version
   #
   plex:
-    image: linuxserver/plex:version-1.40.2.8395-c67dce28e
+    image: linuxserver/plex:version-1.41.3.9314-a0bfb8370
     container_name: plex
     network_mode: host
     environment:
