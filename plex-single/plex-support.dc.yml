@@ -1,26 +1,27 @@
 version: "3"
 services:
-  # latest versions as of 10/09/2024
+  # latest versions as of 09/14/2025
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
   #
   # ports:
   #  tautulli: 12701
   #  ombi: 12702
   #  radarr: 12710
-  #  sonarr: 12720 
+  #  sonarr: 12720
   #  sabnzbd: 12730, 12731
   #  nzbhydra2: 12740
+  #  caddy: 8027
   #
   # versions:
   #  radarr: https://hub.docker.com/r/linuxserver/radarr/tags?page=1&ordering=name&name=version
   #  sonarr: https://hub.docker.com/r/linuxserver/sonarr/tags?page=1&ordering=name&name=version
   #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
-  #  nzbhydra2: https://hub.docker.com/r/hotio/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #  nzbhydra2: https://hub.docker.com/r/linuxserver/nzbhydra2/tags?page=1&ordering=last_updated&name=release
   #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
   #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
   #
   radarr:
-    image: linuxserver/radarr:version-5.9.1.9070
+    image: linuxserver/radarr:version-5.27.5.10198
     container_name: radarr
     environment:
       - PUID=0
@@ -38,7 +39,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr:
-    image: linuxserver/sonarr:version-4.0.9.2244
+    image: linuxserver/sonarr:version-4.0.15.2941
     container_name: sonarr
     environment:
       - PUID=0
@@ -56,7 +57,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd:
-    image: linuxserver/sabnzbd:version-4.3.3
+    image: linuxserver/sabnzbd:version-4.5.3
     container_name: sabnzbd
     environment:
       - PUID=0
@@ -71,7 +72,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   nzbhydra2:
-    image: hotio/nzbhydra2:release-7.7.0
+    image: linuxserver/nzbhydra2:version-v7.16.3
     container_name: nzbhydra2
     environment:
       - PUID=1000
@@ -86,7 +87,7 @@ services:
       - 12740:5076
     restart: unless-stopped
   tautulli:
-    image: linuxserver/tautulli:version-v2.9.7
+    image: linuxserver/tautulli:version-v2.16.0
     container_name: tautulli
     environment:
       - PUID=0
@@ -99,7 +100,7 @@ services:
       - 12701:8181
     restart: unless-stopped
   ombi:
-    image: linuxserver/ombi:version-v4.44.1
+    image: linuxserver/ombi:version-v4.47.1
     container_name: ombi
     environment:
       - PUID=0
@@ -113,4 +114,22 @@ services:
     depends_on:
       - sonarr
       - radarr
+    restart: unless-stopped
+  caddy:
+    image: caddy:2.10.0
+    container_name: caddy
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /share/CACHEDEV1_DATA/caddy/conf:/etc/caddy
+      - /share/CACHEDEV1_DATA/caddy/site:/srv
+      - /share/CACHEDEV1_DATA/caddy/data:/data
+      - /share/CACHEDEV1_DATA/caddy/config:/config
+    ports:
+      # deco port forwarding 443 -> 8443 and then caddy 8443 -> 443
+      # this gets around qnap having 443 already in use
+      - 8443:443
+      - 8443:443/udp # For HTTP/3 support
+    depends_on:
+      - ombi
     restart: unless-stopped

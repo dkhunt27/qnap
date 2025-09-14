@@ -19,7 +19,7 @@ Replace 192.168.0.227 with your QNAP IP
 ## ssh
 https://www.qnap.com/en/how-to/knowledge-base/article/how-to-access-qnap-nas-by-ssh/
 ```
-
+ssh [username]
 ```
 
 
