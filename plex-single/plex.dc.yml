@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # latest versions as of  09/14/2025
+  # latest versions as of 01/06/2026
   #
   # ports:
   #  plex: 32400
@@ -9,7 +9,7 @@ services:
   #  plex: https://hub.docker.com/r/linuxserver/plex/tags?page=1&ordering=name&name=version
   #
   plex:
-    image: linuxserver/plex:version-1.42.1.10060-4e8b05daf
+    image: linuxserver/plex:version-1.42.2.10156-f737b826c
     container_name: plex
     network_mode: host
     environment:

@@ -1,7 +1,8 @@
 version: "3"
 services:
-  # latest versions as of 09/14/2025
+  # latest versions as of 01/06/2026
   #   to fix the sabnzbd 403 errors, need to add domain to whitelist in settings
+  #       - in sabnzbd [ip]:12730/, under Special tab, update "host_whitelist" and add "sabnzbd"
   #
   # ports:
   #  tautulli: 12701
@@ -16,12 +17,12 @@ services:
   #  radarr: https://hub.docker.com/r/linuxserver/radarr/tags?page=1&ordering=name&name=version
   #  sonarr: https://hub.docker.com/r/linuxserver/sonarr/tags?page=1&ordering=name&name=version
   #  sabnzbd: https://hub.docker.com/r/linuxserver/sabnzbd/tags?page=1&ordering=name&name=version
-  #  nzbhydra2: https://hub.docker.com/r/linuxserver/nzbhydra2/tags?page=1&ordering=last_updated&name=release
+  #  nzbhydra2: https://hub.docker.com/r/linuxserver/nzbhydra2/tags?page=1&ordering=last_updated&name=version
   #  tautulli: https://hub.docker.com/r/linuxserver/tautulli/tags?page=1&ordering=name&name=version
   #  ombi: https://hub.docker.com/r/linuxserver/ombi/tags?page=1&ordering=name&name=version
   #
   radarr:
-    image: linuxserver/radarr:version-5.27.5.10198
+    image: linuxserver/radarr:version-6.0.4.10291
     container_name: radarr
     environment:
       - PUID=0
@@ -39,7 +40,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sonarr:
-    image: linuxserver/sonarr:version-4.0.15.2941
+    image: linuxserver/sonarr:version-4.0.16.2944
     container_name: sonarr
     environment:
       - PUID=0
@@ -57,7 +58,7 @@ services:
       - nzbhydra2
     restart: unless-stopped
   sabnzbd:
-    image: linuxserver/sabnzbd:version-4.5.3
+    image: linuxserver/sabnzbd:version-4.5.5
     container_name: sabnzbd
     environment:
       - PUID=0
@@ -72,7 +73,7 @@ services:
       - 12731:9090
     restart: unless-stopped
   nzbhydra2:
-    image: linuxserver/nzbhydra2:version-v7.16.3
+    image: linuxserver/nzbhydra2:version-v8.2.1
     container_name: nzbhydra2
     environment:
       - PUID=1000
