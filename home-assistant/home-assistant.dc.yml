@@ -1,0 +1,51 @@
+version: "3"
+services:
+  # latest versions as of 10/09/2024
+  #
+  # ports:
+  #  homeassistant: 12790
+  #
+  # versions:
+  #  homeassistant: https://hub.docker.com/r/linuxserver/homeassistant/tags?page=1&ordering=name&name=version
+  #
+  # latest version as of 09/06/2026
+  #
+  # network_mode: host, so ports below are real (not remapped) - browse/connect directly:
+  #  zwave-js-ui webui: 8091
+  #  zwave-js-ui websocket (point HA's "Z-Wave JS" integration at ws://<nas-ip>:3000): 3000
+  #
+  # versions:
+  #  zwave-js-ui: https://hub.docker.com/r/zwavejs/zwave-js-ui/tags
+  #
+  homeassistant:
+    image: linuxserver/homeassistant:version-2026.9.1
+    container_name: homeassistant
+    network_mode: host
+    user: "$PUID:$PGID"
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Etc/UTC
+    volumes:
+      - /share/CACHEDEV1_DATA/homeassistant/config:/config
+    ports:
+      - 8123:8123 #optional
+    devices:
+      # stable symlinks created by /lib/udev/rules.d/99-usb-serial-homeassistant.rules
+      # (keyed to each dongle's USB serial number; see /share/CACHEDEV1_DATA/udev-rules/)
+      - /dev/zigbee:/dev/zigbee #SONOFF Zigbee 3.0 USB Dongle Plus MG24
+      - /dev/zwave:/dev/zwave #SONOFF Z-Wave 800 Dongle Plus (PZG23)
+    restart: unless-stopped
+  zwave:
+    image: zwavejs/zwave-js-ui:11.23.0
+    container_name: zwave
+    network_mode: host
+    environment:
+      - TZ=Etc/UTC
+    volumes:
+      - /share/CACHEDEV1_DATA/zwave/config:/usr/src/app/store
+    ports:
+      - 8091:8091 #optional
+    devices:
+      - /dev/zwave:/dev/zwave
+    restart: unless-stopped
